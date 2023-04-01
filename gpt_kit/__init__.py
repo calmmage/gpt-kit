@@ -1,5 +1,5 @@
 import os
-from .api.utils import get_token_count
+from .api.utils import get_token_count, list_models, get_model_limit
 from .api.gpt_api import GptApi
 
 # todo: if only import magic if magic is enabled
