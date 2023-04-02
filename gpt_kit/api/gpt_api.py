@@ -22,7 +22,7 @@ class GptApi:
                  **kwargs):
         model = parse_model(model)
         if max_tokens is None:
-            max_tokens = get_model_token_limit(model)
+            max_tokens = self._calculate_max_tokens(prompt, model)
         if model in ['gpt-3.5-turbo', 'gpt-4']:
             messages = [{'content': prompt, 'role': 'user'}]
             res = self.complete_chat(

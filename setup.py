@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 setup(
     name='gpt-kit',
     description='OOP wrapper and utils for OpenAI GPT API',
-    version='0.0.2',
+    version='0.0.3',
     packages=find_packages(),
     author='Petr Lavrov',
     author_email='petr.b.lavrov@gmail.com',
