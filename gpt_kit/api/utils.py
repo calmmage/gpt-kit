@@ -102,7 +102,7 @@ MODEL_TOKEN_LIMITS = {
 def parse_model(model: str):
     if model in MODEL_NAMES:
         return model
-    candidates = [m for m in MODEL_NAMES if m in model]
+    candidates = [m for m in MODEL_NAMES if model in m]
     if len(candidates) == 0:
         raise ValueError(f"Model {model} is not supported")
     elif len(candidates) > 1:

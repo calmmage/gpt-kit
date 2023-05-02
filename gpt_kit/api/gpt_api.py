@@ -2,6 +2,11 @@ from gpt_kit.api.core import _GptApi
 from gpt_kit.api.utils import parse_model, get_models, get_token_count, \
     get_model_token_limit
 
+DEFAULT_COMPLETE_MODEL = 'text-davinci-003'
+DEFAULT_EDIT_MODEL = 'text-davinci-edit-001'
+DEFAULT_INSTERT_MODEL = 'text-davinci-003'
+DEFAULT_CHAT_MODEL = 'gpt-3.5-turbo'
+
 
 class GptApi:
     def __init__(self, api_key=None, auto_discover_api_key=True):
@@ -18,7 +23,7 @@ class GptApi:
         else:
             return choices[0]
 
-    def complete(self, prompt, model='text-davinci-003', max_tokens=None,
+    def complete(self, prompt, model=DEFAULT_COMPLETE_MODEL, max_tokens=None,
                  **kwargs):
         model = parse_model(model)
         if max_tokens is None:
@@ -40,7 +45,7 @@ class GptApi:
     def _render_chat_prompt(self, messages):
         return str(messages)
 
-    def complete_chat(self, messages, model='gpt-3.5-turbo', max_tokens=None,
+    def complete_chat(self, messages, model=DEFAULT_CHAT_MODEL, max_tokens=None,
                       **kwargs):
         if isinstance(messages, str):
             messages = [{'content': messages, 'role': 'user'}]
@@ -56,7 +61,7 @@ class GptApi:
         )
         return self.parse_results(res, chat=True)
 
-    def edit(self, prompt, instruction, model='text-davinci-003', **kwargs):
+    def edit(self, prompt, instruction, model=DEFAULT_EDIT_MODEL, **kwargs):
         model = parse_model(model)
         res = self.api.edit(prompt, instruction, model=model, **kwargs)
         return self.parse_results(res)

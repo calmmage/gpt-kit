@@ -1,4 +1,5 @@
-from .gpt_api import GptApi
+from .gpt_api import GptApi, DEFAULT_COMPLETE_MODEL, DEFAULT_EDIT_MODEL, \
+    DEFAULT_CHAT_MODEL, DEFAULT_INSTERT_MODEL
 
 # check if interactive mode?
 import os
@@ -7,7 +8,7 @@ import os
 gpt_api = GptApi(auto_discover_api_key=False)
 
 
-def complete_chat(messages, model='gpt-3.5-turbo', max_tokens=None,
+def complete_chat(messages, model=DEFAULT_CHAT_MODEL, max_tokens=None,
                   **kwargs):
     return gpt_api.complete_chat(
         messages=messages,
@@ -17,7 +18,7 @@ def complete_chat(messages, model='gpt-3.5-turbo', max_tokens=None,
     )
 
 
-def complete(prompt, model='davinci', max_tokens=None, **kwargs):
+def complete(prompt, model=DEFAULT_COMPLETE_MODEL, max_tokens=None, **kwargs):
     return gpt_api.complete(
         prompt=prompt,
         model=model,
@@ -26,17 +27,17 @@ def complete(prompt, model='davinci', max_tokens=None, **kwargs):
     )
 
 
-def edit(prompt, instruction, model='davinci', max_tokens=None, **kwargs):
+def edit(prompt, instruction, model=DEFAULT_EDIT_MODEL,
+         **kwargs):
     return gpt_api.edit(
         prompt=prompt,
         instruction=instruction,
         model=model,
-        max_tokens=max_tokens,
         **kwargs
     )
 
 
-def insert(prompt, model='davinci', max_tokens=None, **kwargs):
+def insert(prompt, model=DEFAULT_INSTERT_MODEL, max_tokens=None, **kwargs):
     return gpt_api.insert(
         prompt=prompt,
         model=model,

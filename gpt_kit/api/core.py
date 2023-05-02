@@ -4,6 +4,8 @@ import logging
 from pathlib import Path
 import os
 
+from .gpt_api import DEFAULT_CHAT_MODEL
+
 logger = logging.getLogger(__name__)
 
 
@@ -34,8 +36,9 @@ class _GptApi:
             openai.api_key = self._discover_api_key()
         # todo: make sure openai key is set.. ?
 
+    @staticmethod
     def complete_chat(
-            self, messages, model="gpt-3.5-turbo",
+            messages, model=DEFAULT_CHAT_MODEL,
             max_tokens=None,
             temperature=None,
             n=None,
@@ -63,8 +66,9 @@ class _GptApi:
             **kwargs
         )
 
+    @staticmethod
     def complete(
-            self, prompt, model,
+            prompt, model,
             max_tokens=None,
             temperature=None,
             n=None,
@@ -89,13 +93,12 @@ class _GptApi:
             **kwargs
         )
 
+    @staticmethod
     def edit(
-            self, prompt, instruction, model,
+            prompt, instruction, model,
             temperature=None,
             n=None,
             top_p=None,
-            stream=None,
-            stop=None,
             # user=None,
             **kwargs
     ):
@@ -103,7 +106,9 @@ class _GptApi:
         # 'code-davinci-edit-001',
         # 'text-davinci-edit-001',
         if model not in ['code-davinci-edit-001', 'text-davinci-edit-001']:
-            raise ValueError(f"model {model} not supported for chat")
+            raise ValueError(
+                f"model {model} not supported for edit, should be one of: "
+                f"'code-davinci-edit-001', 'text-davinci-edit-001'")
         return openai.Edit.create(
             model=model,  # "text-davinci-edit-001",
             input=prompt,  # "What day of the wek is it?",
@@ -111,44 +116,40 @@ class _GptApi:
             temperature=temperature,
             n=n,
             top_p=top_p,
-            stream=stream,
-            stop=stop,
             # user=user,
             **kwargs
         )
 
-
-    INSERT_TOKEN = ['insert']
-
+    INSERT_TOKEN = '[insert]'
 
     def insert(self, prompt, model, **kwargs):
         # model should be:
         # 'text-davinci-003'
-        if model not in ['code-davinci-003']:
+        if model not in ['text-davinci-003', 'code-davinci-002']:
             raise ValueError(f"model {model} not supported for insert")
         # INSERT_TOKEN has to be in the prompt exactly once
         if prompt.count(self.INSERT_TOKEN) != 1:
             raise ValueError(
                 f"{self.INSERT_TOKEN} must be in the prompt exactly once")
-        return self.complete(prompt, model=model, **kwargs)
-
+        prefix, suffix = prompt.split(self.INSERT_TOKEN)
+        return self.complete(prefix, suffix=suffix, model=model, **kwargs)
 
     # -----------------
     # extra methods
     # -----------------
 
-    def get_models(self):
+    @staticmethod
+    def get_models():
         # return openai.Engine.list()
         return openai.Model.list()
 
-
     # embedding
-    def get_embeddings(self, text, model):
+    @staticmethod
+    def get_embeddings(text, model):
         return openai.Embedding.list(
             model=model,
             query=text,
         )
-
 
     # -----------------
     # utils
@@ -201,7 +202,6 @@ class _GptApi:
             return api_key
         raise ValueError("api_key not found")
 
-
     @staticmethod
     def _discover_api_key_on_disk():
         if DEFAULT_API_KEY_PATH.exists():
@@ -213,12 +213,10 @@ class _GptApi:
                 return open(path).read()
         return None
 
-
     @staticmethod
     def _request_api_key_from_user():
         USER_MESSAGE = "Please provide your OpenAI API key"
         return input_with_timeout(USER_MESSAGE)
-
 
     @staticmethod
     def _save_api_key_to_disk(api_key):
@@ -227,5 +225,3 @@ class _GptApi:
                        f"Default path is {DEFAULT_API_KEY_PATH}"
         path = input_with_timeout(USER_MESSAGE, DEFAULT_API_KEY_PATH)
         path.write_text(api_key)
-
-
