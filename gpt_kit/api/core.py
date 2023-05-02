@@ -1,10 +1,8 @@
-import openai
-from dotenv import load_dotenv
 import logging
-from pathlib import Path
+import openai
 import os
-
-from .gpt_api import DEFAULT_CHAT_MODEL
+from dotenv import load_dotenv
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +36,7 @@ class _GptApi:
 
     @staticmethod
     def complete_chat(
-            messages, model=DEFAULT_CHAT_MODEL,
+            messages, model,
             max_tokens=None,
             temperature=None,
             n=None,
