@@ -6,3 +6,4 @@ from .api.gpt_api import GptApi
 # if os.getenv("MAGIC_ENABLED", False):
 from .api.magic import gpt_api, complete, complete_chat, edit, insert
 
+__version__ = "0.0.5"
