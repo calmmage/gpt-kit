@@ -1,10 +1,10 @@
-from gpt_kit.api.core import _GptApi
-from gpt_kit.api.utils import parse_model, get_models, get_token_count, \
+from .core import _GptApi
+from .utils import parse_model, get_models, get_token_count, \
     get_model_token_limit
 
 DEFAULT_COMPLETE_MODEL = 'text-davinci-003'
 DEFAULT_EDIT_MODEL = 'text-davinci-edit-001'
-DEFAULT_INSTERT_MODEL = 'text-davinci-003'
+DEFAULT_INSERT_MODEL = 'text-davinci-003'
 DEFAULT_CHAT_MODEL = 'gpt-3.5-turbo'
 
 

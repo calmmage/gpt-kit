@@ -1,5 +1,5 @@
 from .gpt_api import GptApi, DEFAULT_COMPLETE_MODEL, DEFAULT_EDIT_MODEL, \
-    DEFAULT_CHAT_MODEL, DEFAULT_INSTERT_MODEL
+    DEFAULT_CHAT_MODEL, DEFAULT_INSERT_MODEL
 
 # check if interactive mode?
 import os
@@ -37,7 +37,7 @@ def edit(prompt, instruction, model=DEFAULT_EDIT_MODEL,
     )
 
 
-def insert(prompt, model=DEFAULT_INSTERT_MODEL, max_tokens=None, **kwargs):
+def insert(prompt, model=DEFAULT_INSERT_MODEL, max_tokens=None, **kwargs):
     return gpt_api.insert(
         prompt=prompt,
         model=model,
