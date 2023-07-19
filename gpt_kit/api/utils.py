@@ -1,5 +1,4 @@
-import re
-import math
+import tiktoken
 
 
 def discover_gpt_api_key():
@@ -22,7 +21,6 @@ def get_token_count(text, model="gpt-3.5-turbo"):
     calculate amount of tokens in text
     model: gpt-3.5-turbo, gpt-4, text-davinci-003, text-curie-001, code-davinci-edit-001, text-davinci-edit-001, code-davinci-002
     """
-    import tiktoken
     model = parse_model(model)
     # To get the tokeniser corresponding to a specific model in the OpenAI API:
     enc = tiktoken.encoding_for_model(model)
