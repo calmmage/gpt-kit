@@ -1,17 +1,28 @@
 [tool.poetry]
 name = "gpt-kit"
-version = { attr = "gpt_kit.__version__" }
+version = "0.0.5"
 description = "OOP wrapper and utils for OpenAI GPT API"
 authors = ["Reliable Magician <petr.b.lavrov@gmail.com>"]
 readme = "README.md"
 packages = [{ include = "gpt_kit" }]
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 4 - Beta",
+    "Environment :: Other Environment",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-# Other dependencies from requirements.txt should be listed here.
+python = "^3.7"
+openai = "^0.2.6"
+python-dotenv = "^0.15.0"
+pytest = "^6.2.4"
 
-[tool.poetry.dev-dependencies]
-# Any development dependencies should be listed here.
+[tool.poetry.extras]
+full = ["transformers"]
 
 [build-system]
 requires = ["poetry-core"]
@@ -19,12 +30,3 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.urls]
 "Home" = "https://github.com/calmmage/gpt_kit"
-
-[[tool.poetry.classifiers]]
-name = "Programming Language :: Python"
-name = "Programming Language :: Python :: 3"
-name = "Development Status :: 4 - Beta"
-name = "Environment :: Other Environment"
-name = "Intended Audience :: Developers"
-name = "Operating System :: OS Independent"
-name = "Topic :: Software Development :: Libraries :: Python Modules"
