@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gpt-kit"
-version = "0.0.6"
+version = "0.0.7"
 description = "OOP wrapper and utils for OpenAI GPT API"
 authors = ["Reliable Magician <petr.b.lavrov@gmail.com>"]
 readme = "README.md"
@@ -17,14 +17,18 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.8"
-openai = "^0.2.6"
-python-dotenv = "^0.15.0"
-pytest = "^6.2.4"
-toml = "^0.10.2"
-tiktoken = "^0.4.0"
+openai = "*"
+python-dotenv = "*"
+pytest = "*"
+toml = "*"
+tiktoken = "*"
 
-[tool.poetry.extras]
-full = ["transformers"]
+[tool.poetry.group.dev.dependencies]
+jupyter = "*"
+pandas = "*"
+black = "*"
+pytest = "*"
+transformers = "*"
 
 [build-system]
 requires = ["poetry-core"]
