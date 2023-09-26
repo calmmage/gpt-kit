@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gpt-kit"
-version = "0.0.5"
+version = "0.0.6"
 description = "OOP wrapper and utils for OpenAI GPT API"
 authors = ["Reliable Magician <petr.b.lavrov@gmail.com>"]
 readme = "README.md"
