@@ -223,12 +223,3 @@ class _GptApi:
                        f"Default path is {DEFAULT_API_KEY_PATH}"
         path = input_with_timeout(USER_MESSAGE, DEFAULT_API_KEY_PATH)
         path.write_text(api_key)
-
-
-def hello_world():
-    print('hello world')
-    return 'hello world'
-
-
-def matrix_transform_mult(a, b):
-    return np.matmul(a, b)
