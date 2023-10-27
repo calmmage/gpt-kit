@@ -100,6 +100,14 @@ class GptEngine:
             )
         return response.choices[0].message.content
 
+    # todo: add retry in case of error. Or at least handle gracefully
+    def run_command(self, command: str, data: str, model=None, **kwargs):
+        return self.chat_create(data, system=command, model=model, **kwargs)
+
+    # todo: if reason is length - continue generation
+    async def arun_command(self, command: str, data: str, model=None, **kwargs):
+        return await self.achat_create(data, system=command, model=model, **kwargs)
+
 
 if __name__ == "__main__":
     # test init
