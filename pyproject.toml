@@ -26,7 +26,6 @@ pydantic-settings = "*"
 loguru = "*"
 aiolimiter = "*"
 ratelimiter = "*"
-langchain = "*"
 
 [tool.poetry.group.dev.dependencies]
 llm-tester = { git = "https://github.com/engineering-friends/LLM-Tester-WIP.git", branch = "frozen-gpt-kit" }
@@ -35,6 +34,7 @@ pandas = "*"
 black = "*"
 pytest = "*"
 transformers = "*"
+langchain = "*"
 
 [build-system]
 requires = ["poetry-core"]
