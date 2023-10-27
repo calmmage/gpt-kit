@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gpt-kit"
-version = "0.0.7"
+version = "0.1.0" # gpt engine prototyoe
 description = "OOP wrapper and utils for OpenAI GPT API"
 authors = ["Reliable Magician <petr.b.lavrov@gmail.com>"]
 readme = "README.md"
@@ -22,6 +22,12 @@ python-dotenv = "*"
 pytest = "*"
 toml = "*"
 tiktoken = "*"
+pydantic-settings = "*"
+llm-tester = { git = "https://github.com/engineering-friends/LLM-Tester-WIP.git", branch = "frozen-gpt-kit" }
+loguru = "*"
+aiolimiter = "*"
+ratelimiter = "*"
+langchain = "*"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "*"
