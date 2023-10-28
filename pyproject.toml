@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gpt-kit"
-version = "0.1.1" # run_command
+version = "0.1.2" # fix gpt_engine chat_create
 description = "OOP wrapper and utils for OpenAI GPT API"
 authors = ["Reliable Magician <petr.b.lavrov@gmail.com>"]
 readme = "README.md"

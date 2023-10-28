@@ -2,7 +2,11 @@ import loguru
 import openai
 from aiolimiter import AsyncLimiter
 from dotenv import load_dotenv
-from llm_tester.src.prompt_base_classes import TemplatedFullPrompt
+
+try:
+    from llm_tester.src.prompt_base_classes import TemplatedFullPrompt
+except:
+    TemplatedFullPrompt = None
 
 from gpt_kit.gpt_engine.config import GptEngineConfig
 
@@ -64,7 +68,7 @@ class GptEngine:
     def run(self, prompt, template=None, user=None, **kwargs):
         if template is None:
             # run with a simple ChatCreate
-            self.chat_create(prompt, user=user, **kwargs)
+            return self.chat_create(prompt, user=user, **kwargs)
         elif isinstance(template, str):
             # todo: run with a template from a library
             raise NotImplementedError
@@ -81,8 +85,17 @@ class GptEngine:
         elif issubclass(template, TemplatedFullPrompt):  # llm tester prompt template
             raise NotImplementedError
 
-    def chat_create(self, prompt, **kwargs):
-        pass
+    def chat_create(self, prompt, system=None, model=None, **kwargs):
+        if system is None:
+            system = self.config.default_system_message
+        if model is None:
+            model = self.config.default_model
+        messages = [
+            {"role": "system", "content": system},
+            {"role": "user", "content": prompt},
+        ]
+        response = openai.ChatCompletion.create(messages=messages, model=model)
+        return response.choices[0].message.content
 
     async def achat_create(self, prompt, system=None, model=None, **kwargs):
         if system is None:
